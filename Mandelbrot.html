@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Mandelbrot Set</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            /* Horizontally center content */
+            align-items: center;
+            /* Vertically center content */
+            height: 100vh;
+            /* Full viewport height */
+            margin: 0;
+            background-color: #102940;
+            /* Background color for the page */
+            font-family: "Arial", sans-serif;
+            /* Change the font to Arial, fallback to sans-serif */
+        }
+
+        .horizontal-align {
+            display: flex;
+            flex-direction: row;
+            /* Align items horizontally */
+            align-items: center;
+            /* Align items vertically */
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .vertical-stack {
+            display: flex;
+            flex-direction: column;
+            /* Stack elements vertically */
+            align-items: left;
+            /* Align items at the center horizontally */
+            margin-left: 20px;
+            /* Adjust spacing between items */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="horizontal-align">
+        <canvas id="pixelCanvas" width="800" height="800"></canvas>
+
+
+
+
+
+        <div class="vertical-stack">
+            <h1>Settings</h1>
+
+            <h3>Zoom</h3>
+            <select id="zoomSelect">
+                <option value="0.01">0.01</option>
+                <option value="0.1">0.1</option>
+                <option value="0.2">0.2</option>
+                <option value="0.5">0.5</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="5">5</option>
+                <option value="10" selected>10</option>
+                <option value="100">100</option>
+            </select>
+            <button id="resetButton">Reset Zoom</button>
+            <h2> </h2>
+
+            <h3>Iterations</h3>
+            <input type="range" min="1" max="100" value="40" id="iterationSlider">
+            <div class="horizontal-align">
+                <input type="text" id="iterationInput" placeholder="Iterations">
+                <button id="applyIterationInput">Apply</button>
+            </div>
+            <p>Iterations: <span id="iterationValue"></span></p>
+            <h2> </h2>
+
+            <h3>Absolute Max</h3>
+            <div class="horizontal-align">
+                <input type="text" id="absoluteInput" placeholder="Absolute">
+                <button id="applyAbsoluteInput">Apply</button>
+            </div>
+            <input type="range" min="1" max="100" value="3" id="absoluteSlider">
+            <p>Absolute: <span id="absoluteValue"></span></p>
+            <h2> </h2>
+
+        </div>
+
+    </div>
+    <script src="MandelbrotScript.js"></script>
+</body>
+
+</html>
