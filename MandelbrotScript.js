@@ -1,3 +1,5 @@
+/* dynamic and static variables */
+
 // Get the canvas element
 const canvas = document.getElementById('pixelCanvas');
 const ctx = canvas.getContext('2d');
@@ -43,6 +45,7 @@ let mandelbrotIterations = parseInt(iterationSlider.value);
 let mandelbrotAbsolute = parseInt(absoluteSlider.value);
 
 
+/* functions */
 
 // Function to draw pixels on the canvas
 function drawPixels() {
@@ -104,6 +107,7 @@ function getMandelbrot(x, y) {
         normedValue = 1;
     }
 
+    //Not used
     const red = 0; // Red component
     const green = 120 - mapValue(length, 0, mandelbrotAbsolute, 0, 120); // Green component
     const blue = Math.round(255 * normedValue); // Blue component
@@ -111,18 +115,24 @@ function getMandelbrot(x, y) {
     // Construct the RGB color string
     let col = `rgb(${red}, ${green}, ${blue})`;
 
-    let hueDegrees = 250 + Math.round(90 * normedValue);
+    /*
+    let hueDegrees = 15 + Math.round(340 * normedValue);
     let saturation = 100; //- mapValue(length, 0, mandelbrotAbsolute, 0, 10);
-    let lightness = 50 - mapValue(length, 0, mandelbrotAbsolute, 0, 10);;
+    let lightness = 50 - mapValue(length, 0, mandelbrotAbsolute, 0, 10);
+    */
+
+    let hueDegrees = 200 + Math.round(500 * normedValue);
+    let saturation = 100 - mapValue(length, 0, mandelbrotAbsolute, 0, 15);
+    let lightness = 50 - Math.round(50 * normedValue);
+
     // Create a color using HSL representation in CSS
     col = `hsl(${hueDegrees}, ${saturation}%, ${lightness}%)`;
-
 
 
     return col;
 }
 
-
+//calculate complex number from canvas position
 function getComplexNumber(x, y) {
     let cX = mapValue(x, 0, pixelCount, (-1) * complexSize, complexSize);
     let cY = mapValue(y, 0, pixelCount, complexSize, (-1) * complexSize);
@@ -137,14 +147,14 @@ function getComplexNumber(x, y) {
     return { cX: cX, cY: cY };
 }
 
+//map a value
 function mapValue(value, fromMin, fromMax, toMin, toMax) {
     const ratio = (value - fromMin) / (fromMax - fromMin);
     return toMin + ratio * (toMax - toMin);
 }
 
 
-
-
+/* UI Interaction */
 
 function handleClick(event) {
     const rect = canvas.getBoundingClientRect(); // Get the position of the canvas element
@@ -240,6 +250,10 @@ function setAbsoluteFromTextInput() {
     }
 }
 
+
+/* Init helpers */
+
+//sets default value to text variables in UI
 function initTextValues() {
     document.getElementById('iterationValue').textContent = mandelbrotIterations;
     document.getElementById('absoluteValue').textContent = mandelbrotAbsolute;
@@ -249,6 +263,8 @@ function initTextValues() {
     document.getElementById('zoomValue').textContent = 1;
 }
 
+
+/* Listeners for UI interaction */
 
 // Event listener for selector change
 zoomSelect.addEventListener('change', changeZoom);
@@ -271,6 +287,9 @@ absoluteSlider.addEventListener('input', function () {
     document.getElementById('absoluteValue').textContent = mandelbrotAbsolute;
     drawPixels(); // Redraw pixels when the slider value changes
 });
+
+
+/* Linear Code */
 
 initTextValues();
 
