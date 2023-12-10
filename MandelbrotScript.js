@@ -123,8 +123,6 @@ function getMandelbrot(x, y) {
 }
 
 
-
-
 function getComplexNumber(x, y) {
     let cX = mapValue(x, 0, pixelCount, (-1) * complexSize, complexSize);
     let cY = mapValue(y, 0, pixelCount, complexSize, (-1) * complexSize);
@@ -164,6 +162,9 @@ function handleClick(event) {
 
     zoom *= zoomFactor;
 
+    document.getElementById('complexPositionValue').textContent = `${complexPosition.cX.toFixed(7)} + i(${complexPosition.cY.toFixed(7)})`;
+    document.getElementById('zoomValue').textContent = zoom;
+
     if (zoomFactor > 1.1) {
         mandelbrotIterations *= (0.2 * zoomFactor);
     }
@@ -184,6 +185,9 @@ function resetZoom() {
     zoom = 1.0;
     complexOffsetX = defaultComplexOffsetX;
     complexOffsetY = defaultComplexOffsetY;
+
+    initTextValues();
+
     //document.getElementById('pixelSizeSelect').value = defaultPixelSize.toString();
     drawPixels(); // Redraw pixels with default size
 }
@@ -236,6 +240,15 @@ function setAbsoluteFromTextInput() {
     }
 }
 
+function initTextValues() {
+    document.getElementById('iterationValue').textContent = mandelbrotIterations;
+    document.getElementById('absoluteValue').textContent = mandelbrotAbsolute;
+
+    const complexMidCoord = getComplexNumber(canvasSize/2,canvasSize/2);
+    document.getElementById('complexPositionValue').textContent = `${complexMidCoord.cX} + i(${complexMidCoord.cY})`;
+    document.getElementById('zoomValue').textContent = 1;
+}
+
 
 // Event listener for selector change
 zoomSelect.addEventListener('change', changeZoom);
@@ -259,9 +272,7 @@ absoluteSlider.addEventListener('input', function () {
     drawPixels(); // Redraw pixels when the slider value changes
 });
 
+initTextValues();
 
 // Initial draw of pixels
-document.getElementById('iterationValue').textContent = mandelbrotIterations;
-document.getElementById('absoluteValue').textContent = mandelbrotAbsolute;
-
 drawPixels();

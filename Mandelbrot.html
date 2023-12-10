@@ -47,10 +47,6 @@
     <div class="horizontal-align">
         <canvas id="pixelCanvas" width="800" height="800"></canvas>
 
-
-
-
-
         <div class="vertical-stack">
             <h1>Settings</h1>
 
@@ -67,7 +63,6 @@
                 <option value="100">100</option>
             </select>
             <button id="resetButton">Reset Zoom</button>
-            <h2> </h2>
 
             <h3>Iterations</h3>
             <input type="range" min="1" max="100" value="40" id="iterationSlider">
@@ -76,7 +71,6 @@
                 <button id="applyIterationInput">Apply</button>
             </div>
             <p>Iterations: <span id="iterationValue"></span></p>
-            <h2> </h2>
 
             <h3>Absolute Max</h3>
             <div class="horizontal-align">
@@ -85,7 +79,11 @@
             </div>
             <input type="range" min="1" max="100" value="3" id="absoluteSlider">
             <p>Absolute: <span id="absoluteValue"></span></p>
-            <h2> </h2>
+            <h5> </h5>
+
+            <h3>Frame</h3>
+            <p>Pos: <span id="complexPositionValue"></span></p>
+            <p>Zoom: <span id="zoomValue"></span></p>
 
         </div>
 
